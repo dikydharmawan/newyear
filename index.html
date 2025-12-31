@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy New Year, Sayang!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;600&display=swap");
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: "Outfit", sans-serif;
+        background: linear-gradient(135deg, #2b1055, #7597de);
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .fireworks {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .firework {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #fff, 0 0 20px #ff00de, 0 0 30px #ff00de;
+        animation: explode 1.5s ease-out infinite;
+      }
+
+      @keyframes explode {
+        0% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 30px;
+        padding: 40px 30px;
+        max-width: 550px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+        position: relative;
+        overflow: hidden;
+        margin: auto;
+        /* Center in flex container */
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 60%
+        );
+        transform: rotate(30deg);
+        pointer-events: none;
+      }
+
+      .title {
+        font-family: "Dancing Script", cursive;
+        font-size: 3em;
+        margin-bottom: 15px;
+        background: linear-gradient(to right, #ff9a9e, #fecfef, #feada6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      }
+
+      .message {
+        font-size: 1.1em;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+      }
+
+      .countdown {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+        color: #ffd700;
+        font-weight: 600;
+        text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        letter-spacing: 1px;
+      }
+
+      button {
+        background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+        border: none;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #fff;
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        font-family: "Outfit", sans-serif;
+      }
+
+      button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+      }
+
+      .surprise {
+        display: none;
+        margin-top: 30px;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .slider {
+        position: relative;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .slider-container {
+        display: grid;
+        grid-template-areas: "stack";
+        width: 100%;
+        position: relative;
+      }
+
+      .slide-card {
+        grid-area: stack;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 20px;
+        padding: 30px 50px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Animation Initial State */
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .slide-card.active {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+        z-index: 2;
+      }
+
+      .slide-card .icon {
+        font-size: 3em;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      }
+
+      .slide-card p {
+        font-size: 1.1em;
+        line-height: 1.5;
+        margin: 0;
+        color: #fff;
+      }
+
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 2.5em;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        color: #fff;
+        transform: translateY(-50%) scale(1.2);
+      }
+
+      .prev-btn {
+        left: -10px;
+      }
+
+      .next-btn {
+        right: -10px;
+      }
+
+      audio {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="fireworks" id="fireworks"></div>
+    <div class="card">
+      <h1 class="title">Happy New Year, Sayang! ❤️</h1>
+      <p class="message">
+        Tahun ini telah penuh dengan kenangan indah bersamamu. Aku bersyukur
+        bisa melewati setiap momen, baik suka maupun duka, bersama orang yang
+        paling aku cintai. Kamu adalah cahaya yang menerangi hari-hariku, dan
+        aku tidak sabar untuk menghadapi tahun depan dengan lebih banyak lagi
+        tertawa, petualangan, dan cinta. Semoga tahun baru ini membawa
+        kebahagiaan tak terbatas untuk kita berdua. Aku mencintaimu lebih dari
+        kata-kata bisa ungkapkan. Selamat Tahun Baru, Sayangku!
+      </p>
+      <div class="countdown" id="countdown">
+        Hitung Mundur ke Midnight: 00:00:00:00
+      </div>
+      <button id="surpriseBtn">Klik untuk Kejutan</button>
+      <div class="surprise" id="surprise">
+        <div class="slider">
+          <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
+          <div class="slider-container" id="sliderContainer">
+            <div class="slide-card active">
+              <div class="icon">💖</div>
+              <p>
+                Kamu adalah segalanya bagiku, dan aku tidak bisa membayangkan
+                hidup tanpa senyumanmu yang manis.
+              </p>
+            </div>
+            <div class="slide-card">
+              <div class="icon">🌟</div>
+              <p>
+                Setiap hari bersamamu terasa seperti petualangan baru, penuh
+                dengan cinta dan kebahagiaan.
+              </p>
+            </div>
+            <div class="slide-card">
+              <div class="icon">😘</div>
+              <p>
+                Aku mencintaimu lebih dalam dari lautan, lebih tinggi dari
+                bintang, dan lebih abadi dari waktu.
+              </p>
+            </div>
+            <div class="slide-card">
+              <div class="icon">🎉</div>
+              <p>
+                Semoga tahun baru ini membawa lebih banyak momen spesial
+                bersama, penuh dengan tawa dan kenangan.
+              </p>
+            </div>
+            <div class="slide-card">
+              <div class="icon">❤️</div>
+              <p>
+                Kamu adalah alasan aku bangun setiap pagi dengan senyum, dan aku
+                ingin menghabiskan selamanya bersamamu.
+              </p>
+            </div>
+          </div>
+          <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
+        </div>
+      </div>
+    </div>
+    <!-- Musik latar otomatis (opsional); ganti src dengan file musik Anda -->
+    <audio id="bgMusic" autoplay loop>
+      <source
+        src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
+        type="audio/wav"
+      />
+      Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <script>
+      // Animasi kembang api saat halaman dibuka
+      function createFirework() {
+        const firework = document.createElement("div");
+        firework.classList.add("firework");
+        firework.style.left = Math.random() * 100 + "%";
+        firework.style.top = Math.random() * 100 + "%";
+        firework.style.animationDelay = Math.random() * 2 + "s";
+        document.getElementById("fireworks").appendChild(firework);
+        setTimeout(() => firework.remove(), 2000);
+      }
+
+      // Buat beberapa kembang api saat load
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createFirework, i * 100);
+      }
+
+      // Hitung mundur ke midnight (00:00:00 pada 1 Januari)
+      function updateCountdown() {
+        const now = new Date();
+        const newYear = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0); // 1 Januari tahun depan
+        const diff = newYear - now;
+
+        if (diff > 0) {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+          document.getElementById(
+            "countdown"
+          ).innerText = `Hitung Mundur ke Midnight: ${days}:${hours
+            .toString()
+            .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+        } else {
+          document.getElementById("countdown").innerText =
+            "Selamat Tahun Baru!";
+        }
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Tombol kejutan
+      document
+        .getElementById("surpriseBtn")
+        .addEventListener("click", function () {
+          const surprise = document.getElementById("surprise");
+          surprise.style.display =
+            surprise.style.display === "none" ? "block" : "none";
+        });
+
+      // Slider navigasi (Fade/Scale Effect)
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide-card");
+      const totalSlides = slides.length;
+
+      function updateSlider() {
+        // Hapus class active dari semua slide
+        slides.forEach((slide) => slide.classList.remove("active"));
+        // Tambahkan class active ke slide saat ini
+        slides[currentSlide].classList.add("active");
+      }
+
+      // Initialize slider to show the first slide
+      updateSlider();
+
+      document.getElementById("prevBtn").addEventListener("click", function () {
+        currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+        updateSlider();
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", function () {
+        currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+        updateSlider();
+      });
+
+      // Swipe support untuk mobile
+      let startX = 0;
+      const sliderContainer = document.getElementById("sliderContainer");
+
+      sliderContainer.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      sliderContainer.addEventListener("touchend", (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+        if (Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            // Swipe left, next slide
+            currentSlide =
+              currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
+          } else {
+            // Swipe right, prev slide
+            currentSlide =
+              currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+          }
+          updateSlider();
+        }
+      });
+    </script>
+  </body>
+</html>
